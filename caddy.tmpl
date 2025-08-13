@@ -1,0 +1,10 @@
+{{ range $i, $container :=  . }}
+  {{ if $container.Env.VIRTUAL_HOST }}
+{{index $container.Env "VIRTUAL_HOST"}} {
+  {{ with $address := index $container.Addresses 0 }}
+	reverse_proxy {{$address.IP}}:{{$address.Port}}
+	tls internal
+  {{ end }}
+}
+  {{ end }}
+{{ end }}
