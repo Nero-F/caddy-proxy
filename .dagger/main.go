@@ -17,6 +17,7 @@ package main
 import (
 	"context"
 	"dagger/ci/internal/dagger"
+	"strings"
 )
 
 type Ci struct{}
@@ -38,7 +39,7 @@ func (m *Ci) PublishGhcr(ctx context.Context,
 	registry := "ghcr.io"
 	ref, err := src.DockerBuild().
 		WithRegistryAuth(registry, username, password).
-		Publish(ctx, registry+"/"+username+"/caddy-proxy")
+		Publish(ctx, registry+"/"+strings.ToLower(username)+"/caddy-proxy")
 	if err != nil {
 		return "", err
 	}
