@@ -7,18 +7,16 @@ A simple dynamic Reverse Proxy Container Ambassador
 
 To run it:
 
-```
-bash
+```bash
 	docker run --name=caddy-proxy \
-		--port 80:80 \
-		--port 443:443 \
+		--publish 80:80 \
+		--publish 443:443 \
 		--volume /var/run/docker.sock:/tmp/docker.sock:rw \
         --detach
-        nero-f/caddy-proxy
+        ghcr.io/nero-f/caddy-proxy
 ```
 
-```
-bash
+```bash
 	docker run --name=my_app \
         --env VIRTUAL_HOST=foo.bar.com
         myapp_container
